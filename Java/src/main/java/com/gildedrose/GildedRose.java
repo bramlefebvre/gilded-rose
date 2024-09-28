@@ -3,8 +3,16 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
+    private QualityUpdater qualityUpdater = new QualityUpdater();
+
     public GildedRose(Item[] items) {
         this.items = items;
+    }
+
+    private void updateQuality(ItemWithCategory itemWithCategory) {
+        Category category = itemWithCategory.getCategory();
+        Item item = itemWithCategory.getItem();
+        category.updateQuality(qualityUpdater, item);
     }
 
     public void updateQuality() {
