@@ -2,6 +2,8 @@ package com.gildedrose;
 
 public class QualityUpdater {
 
+
+
     void updateQualityNormal(Item item) {
         checkInitialQualityIsNotLessThan0(item);
         checkInitialQualityIsNotMoreThan50(item);
@@ -19,7 +21,13 @@ public class QualityUpdater {
         checkInitialQualityIsNotLessThan0(item);
         checkInitialQualityIsNotMoreThan50(item);
         item.sellIn -= 1;
-        increaseQuality(item, 1);
+        int increaseQualityAmount;
+        if (item.sellIn < 0) {
+            increaseQualityAmount = 2;
+        } else {
+            increaseQualityAmount = 1;
+        }
+        increaseQuality(item, increaseQualityAmount);
     }
 
     void updateQualityLegendary(Item item) {
@@ -29,15 +37,14 @@ public class QualityUpdater {
     void updateQualityConcertTicket(Item item) {
         checkInitialQualityIsNotLessThan0(item);
         checkInitialQualityIsNotMoreThan50(item);
-        item.sellIn -= 1;
         if (item.sellIn < 0) {
             item.quality = 0;
         } else {
             int increaseQualityAmount;
-            if (item.sellIn >= 10) {
+            if (item.sellIn >= 11) {
                 increaseQualityAmount = 1;
             } else {
-                if (item.sellIn < 5) {
+                if (item.sellIn < 6) {
                     increaseQualityAmount = 3;
                 } else {
                     increaseQualityAmount = 2;
@@ -45,6 +52,7 @@ public class QualityUpdater {
             }
             increaseQuality(item, increaseQualityAmount);
         }
+        item.sellIn -= 1;
     }
 
     void updateQualityConjured(Item item) {
