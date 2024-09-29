@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GildedRoseTest {
 
     @Test
-    void testNormalQuality0() {
+    void testNormalQualityTo0() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -52,6 +52,15 @@ class GildedRoseTest {
     }
 
     @Test
+    void testAgedBrieQualityTo50() {
+        Item[] items = new Item[] { new Item("Aged Brie", 0, 49) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
     void testSulfuras() {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 0, 80) };
         GildedRose app = new GildedRose(items);
@@ -88,6 +97,15 @@ class GildedRoseTest {
     }
 
     @Test
+    void testBackstagePassesQualityTo50() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 6, 49) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(5, app.items[0].sellIn);
+        assertEquals(50, app.items[0].quality);
+    }
+
+    @Test
     void testBackstagePassesSellIn5() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) };
         GildedRose app = new GildedRose(items);
@@ -107,7 +125,7 @@ class GildedRoseTest {
 
     @Test
     void testConjuredPositiveSellIn() {
-        Item[] items = new Item[] { new Item("Conjured", 5, 10) };
+        Item[] items = new Item[] { new Item("Conjured Mana Cake", 5, 10) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(4, app.items[0].sellIn);
@@ -116,11 +134,20 @@ class GildedRoseTest {
 
     @Test
     void testConjuredSellIn0() {
-        Item[] items = new Item[] { new Item("Conjured", 0, 10) };
+        Item[] items = new Item[] { new Item("Conjured Mana Cake", 0, 10) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(-1, app.items[0].sellIn);
         assertEquals(6, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredQualityTo0() {
+        Item[] items = new Item[] { new Item("Conjured Mana Cake", 0, 3) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.*;
+
 class GildedRose {
     Item[] items;
 
@@ -9,20 +11,42 @@ class GildedRose {
         this.items = items;
     }
 
+    private static final Map<String, Category> nameCategoryMap;
+
+    static {
+        Map<String, Category> map = new HashMap<>();
+        map.put("Aged Brie", Category.AGING);
+        map.put("Sulfuras, Hand of Ragnaros", Category.LEGENDARY);
+        map.put("Backstage passes to a TAFKAL80ETC concert", Category.CONCERT_TICKET);
+        map.put("Conjured Mana Cake", Category.CONJURED);
+        nameCategoryMap = Collections.unmodifiableMap(map);
+    }
+
+    public void updateQuality() {
+        List<ItemWithCategory> itemsWithCategories = getItemsWithCategories();
+        itemsWithCategories.forEach(this::updateQuality);
+    }
+
     private void updateQuality(ItemWithCategory itemWithCategory) {
         Category category = itemWithCategory.getCategory();
         Item item = itemWithCategory.getItem();
         category.updateQuality(qualityUpdater, item);
     }
 
-    public void updateQuality2() {
-
+    private List<ItemWithCategory> getItemsWithCategories() {
+        List<ItemWithCategory> itemsWithCategories = new ArrayList<>();
+        for (Item item : items) {
+            Category category = nameCategoryMap.getOrDefault(item.name, Category.NORMAL);
+            ItemWithCategory itemWithCategory = new ItemWithCategory(item, category);
+            itemsWithCategories.add(itemWithCategory);
+        }
+        return itemsWithCategories;
     }
 
-    public void updateQuality() {
+    private void updateQuality1() {
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                         items[i].quality = items[i].quality - 1;
@@ -71,4 +95,6 @@ class GildedRose {
             }
         }
     }
+
+
 }

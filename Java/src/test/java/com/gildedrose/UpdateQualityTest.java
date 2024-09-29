@@ -25,6 +25,14 @@ public class UpdateQualityTest {
     }
 
     @Test
+    void testNormalQualityTo0() {
+        Item itemPositiveSellIn = new Item("name", 0, 1);
+        qualityUpdater.updateQualityNormal(itemPositiveSellIn);
+        assertEquals(-1, itemPositiveSellIn.sellIn);
+        assertEquals(0, itemPositiveSellIn.quality);
+    }
+
+    @Test
     void testAgingPositiveSellIn() {
         Item itemPositiveSellIn = new Item("name", 10, 10);
         qualityUpdater.updateQualityAging(itemPositiveSellIn);
@@ -41,7 +49,15 @@ public class UpdateQualityTest {
     }
 
     @Test
-    void testLegendaryValid() {
+    void testAgingQualityTo50() {
+        Item itemSellIn0 = new Item("name", 0, 49);
+        qualityUpdater.updateQualityAging(itemSellIn0);
+        assertEquals(-1, itemSellIn0.sellIn);
+        assertEquals(50, itemSellIn0.quality);
+    }
+
+    @Test
+    void testLegendary() {
         Item legendaryItem = new Item("name", 5, 80);
         qualityUpdater.updateQualityLegendary(legendaryItem);
         assertEquals(5, legendaryItem.sellIn);
@@ -89,6 +105,14 @@ public class UpdateQualityTest {
     }
 
     @Test
+    void testConcertTicketQualityTo50() {
+        Item item = new Item("name",6, 49);
+        qualityUpdater.updateQualityConcertTicket(item);
+        assertEquals(5, item.sellIn);
+        assertEquals(50, item.quality);
+    }
+
+    @Test
     void testConjuredPositiveSellIn() {
         Item itemPositiveSellIn = new Item("name", 10, 10);
         qualityUpdater.updateQualityConjured(itemPositiveSellIn);
@@ -102,6 +126,14 @@ public class UpdateQualityTest {
         qualityUpdater.updateQualityConjured(itemSellIn0);
         assertEquals(-1, itemSellIn0.sellIn);
         assertEquals(6, itemSellIn0.quality);
+    }
+
+    @Test
+    void testConjuredQualityTo0() {
+        Item itemSellIn0 = new Item("name", 0, 3);
+        qualityUpdater.updateQualityConjured(itemSellIn0);
+        assertEquals(-1, itemSellIn0.sellIn);
+        assertEquals(0, itemSellIn0.quality);
     }
 
 
