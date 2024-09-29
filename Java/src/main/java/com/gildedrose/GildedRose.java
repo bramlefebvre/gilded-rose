@@ -5,7 +5,7 @@ import java.util.*;
 class GildedRose {
     Item[] items;
 
-    private QualityUpdater qualityUpdater = new QualityUpdater();
+    private final QualityUpdater qualityUpdater = new QualityUpdater();
 
     public GildedRose(Item[] items) {
         this.items = items;
