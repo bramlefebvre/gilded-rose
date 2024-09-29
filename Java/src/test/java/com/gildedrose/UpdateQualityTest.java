@@ -10,18 +10,6 @@ public class UpdateQualityTest {
     private final QualityUpdater qualityUpdater = new QualityUpdater();
 
     @Test
-    void testNormalNegativeQuality() {
-        Item itemNegativeQuality = new Item("name", 5, -1);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityNormal(itemNegativeQuality));
-    }
-
-    @Test
-    void testNormalQuality51() {
-        Item itemQuality51 = new Item("name", 5, 51);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityNormal(itemQuality51));
-    }
-
-    @Test
     void testNormalPositiveSellIn() {
         Item itemPositiveSellIn = new Item("name", 10, 10);
         qualityUpdater.updateQualityNormal(itemPositiveSellIn);
@@ -35,18 +23,6 @@ public class UpdateQualityTest {
         qualityUpdater.updateQualityNormal(itemSellIn0);
         assertEquals(-1, itemSellIn0.sellIn);
         assertEquals(8, itemSellIn0.quality);
-    }
-
-    @Test
-    void testAgingNegativeQuality() {
-        Item itemNegativeQuality = new Item("name", 5, -1);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityAging(itemNegativeQuality));
-    }
-
-    @Test
-    void testAgingQuality51() {
-        Item itemQuality51 = new Item("name", 5, 51);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityAging(itemQuality51));
     }
 
     @Test
@@ -71,24 +47,6 @@ public class UpdateQualityTest {
         qualityUpdater.updateQualityLegendary(legendaryItem);
         assertEquals(5, legendaryItem.sellIn);
         assertEquals(80, legendaryItem.quality);
-    }
-
-    @Test
-    void testLegendaryInvalid() {
-        Item legendaryItem = new Item("name", 5, 79);
-        assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityLegendary(legendaryItem));
-    }
-
-    @Test
-    void testConcertTicketNegativeQuality() {
-        Item itemNegativeQuality = new Item("name", 5, -1);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityConcertTicket(itemNegativeQuality));
-    }
-
-    @Test
-    void testConcertTicketQuality51() {
-        Item itemQuality51 = new Item("name", 5, 51);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityConcertTicket(itemQuality51));
     }
 
     @Test
@@ -121,18 +79,6 @@ public class UpdateQualityTest {
         qualityUpdater.updateQualityConcertTicket(item);
         assertEquals(4, item.sellIn);
         assertEquals(13, item.quality);
-    }
-
-    @Test
-    void testConjuredNegativeQuality() {
-        Item itemNegativeQuality = new Item("name", 5, -1);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityConjured(itemNegativeQuality));
-    }
-
-    @Test
-    void testConjuredQuality51() {
-        Item itemQuality51 = new Item("name", 5, 51);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> qualityUpdater.updateQualityConjured(itemQuality51));
     }
 
     @Test

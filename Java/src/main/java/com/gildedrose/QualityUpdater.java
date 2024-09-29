@@ -5,8 +5,6 @@ public class QualityUpdater {
 
 
     void updateQualityNormal(Item item) {
-        checkInitialQualityIsNotLessThan0(item);
-        checkInitialQualityIsNotMoreThan50(item);
         item.sellIn -= 1;
         int reduceQualityAmount;
         if (item.sellIn < 0) {
@@ -18,8 +16,6 @@ public class QualityUpdater {
     }
 
     void updateQualityAging(Item item) {
-        checkInitialQualityIsNotLessThan0(item);
-        checkInitialQualityIsNotMoreThan50(item);
         item.sellIn -= 1;
         int increaseQualityAmount;
         if (item.sellIn < 0) {
@@ -31,12 +27,10 @@ public class QualityUpdater {
     }
 
     void updateQualityLegendary(Item item) {
-        checkQualityLegendaryItemIs80(item);
+        // do nothing
     }
 
     void updateQualityConcertTicket(Item item) {
-        checkInitialQualityIsNotLessThan0(item);
-        checkInitialQualityIsNotMoreThan50(item);
         if (item.sellIn < 0) {
             item.quality = 0;
         } else {
@@ -56,8 +50,6 @@ public class QualityUpdater {
     }
 
     void updateQualityConjured(Item item) {
-        checkInitialQualityIsNotLessThan0(item);
-        checkInitialQualityIsNotMoreThan50(item);
         item.sellIn -= 1;
         int reduceQualityAmount;
         if (item.sellIn < 0) {
@@ -82,24 +74,6 @@ public class QualityUpdater {
             newQuality = 50;
         }
         item.quality = newQuality;
-    }
-
-    private void checkQualityLegendaryItemIs80(Item item) {
-        if (item.quality != 80) {
-            throw new IllegalArgumentException("Item with name " + item.name + "has a quality not equal to 80, while it is a legendary item");
-        }
-    }
-
-    private void checkInitialQualityIsNotLessThan0(Item item) {
-        if (item.quality < 0) {
-            throw new IllegalArgumentException("Item with name " + item.name + "has a quality less than 0");
-        }
-    }
-
-    private void checkInitialQualityIsNotMoreThan50(Item item) {
-        if (item.quality > 50) {
-            throw new IllegalArgumentException("Item with name " + item.name + "has a quality more than 50");
-        }
     }
 
 }
