@@ -3,7 +3,6 @@ package com.gildedrose;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UpdateQualityTest {
 
@@ -79,6 +78,14 @@ public class UpdateQualityTest {
         qualityUpdater.updateQualityConcertTicket(item);
         assertEquals(4, item.sellIn);
         assertEquals(13, item.quality);
+    }
+
+    @Test
+    void testConcertTicketSellIn0() {
+        Item item = new Item("name",0, 10);
+        qualityUpdater.updateQualityConcertTicket(item);
+        assertEquals(-1, item.sellIn);
+        assertEquals(0, item.quality);
     }
 
     @Test

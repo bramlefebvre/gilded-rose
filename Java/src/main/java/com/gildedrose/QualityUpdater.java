@@ -31,7 +31,7 @@ public class QualityUpdater {
     }
 
     void updateQualityConcertTicket(Item item) {
-        if (item.sellIn < 0) {
+        if (item.sellIn < 1) {
             item.quality = 0;
         } else {
             int increaseQualityAmount;
